@@ -5,10 +5,8 @@
     <classes>
       <class name="by.onliner.goodsorder.BasketTest">
         <methods>
+          <include name="test5"/>
           <include name="beforeClass"/>
-          <include name="test2" invocation-numbers="0 1"/>
-          <include name="test1"/>
-          <include name="test3"/>
           <include name="afterTest"/>
           <include name="afterClass"/>
           <include name="beforeTest"/>

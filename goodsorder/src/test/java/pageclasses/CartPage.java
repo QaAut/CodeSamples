@@ -2,6 +2,8 @@ package pageclasses;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.sql.Driver;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -25,13 +27,16 @@ public class CartPage {
 
 	@FindBy(xpath = "//div[@class='cart-navigation__sum']/span/span[3]")
 	WebElement sumOfOrder;
-	
+
 	@FindBy(xpath = "//div[@class='cart-product-add-box']/span[3]")
 	WebElement increaseQuanbtn;
-	
+
 	@FindBy(xpath = "//div[@class='cart-product-add-box']/span[1]")
 	WebElement decreaseQuanbtn;
-	
+
+	@FindBy(xpath = "//a[contains(@class,'cart-navigation__button_сheckout')]")
+	WebElement makeOrderBtn;
+
 	// Methods begin here
 	public CartPage(WebDriver driver) { // constructor for the page
 		this.driver = driver;
@@ -67,31 +72,34 @@ public class CartPage {
 		return newTitle;
 
 	}
+
 	public void clickIncrQuant() throws AWTException { // This method clicks on increase quantity button
-		//Increase button appears only on hover. So we use coordinates to move the mouse over it. 
-		 
-		  Point coordinates = quantityBox.getLocation();
-		  Robot robot = new Robot();
-		  robot.mouseMove(coordinates.getX()+49,coordinates.getY()+130);
-		  WebDriverWait wait = new WebDriverWait(driver, 20); // explicit wait for dynamic elements
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.xpath("//div[@class='cart-product-add-box']/span[3]")));
-		  increaseQuanbtn.click();
-		  
+		// Increase button appears only on hover. So we use coordinates to move the
+		// mouse over it.
 
-	}
-	public void clickDecrQuant() throws AWTException { // This method clicks on decrease quantity button
-		//Increase button appears only on hover. So we use coordinates to move the mouse over it. 
-		  Point coordinates = quantityBox.getLocation();
-		  Robot robot = new Robot();
-		  robot.mouseMove(coordinates.getX()- 20,coordinates.getY()+130);
+		Point coordinates = quantityBox.getLocation();
+		Robot robot = new Robot();
+		robot.mouseMove(coordinates.getX() + 49, coordinates.getY() + 130);
 		WebDriverWait wait = new WebDriverWait(driver, 20); // explicit wait for dynamic elements
-			wait.until(ExpectedConditions
-					.visibilityOfElementLocated(By.xpath("//div[@class='cart-product-add-box']/span[1]")));
-		  decreaseQuanbtn.click(); 
-		  
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//div[@class='cart-product-add-box']/span[3]")));
+		increaseQuanbtn.click();
 
 	}
-	
+
+	public void clickDecrQuant() throws AWTException { // This method clicks on decrease quantity button
+		// Increase button appears only on hover. So we use coordinates to move the
+		// mouse over it.
+		Point coordinates = quantityBox.getLocation();
+		Robot robot = new Robot();
+		robot.mouseMove(coordinates.getX() - 20, coordinates.getY() + 130);
+		WebDriverWait wait = new WebDriverWait(driver, 20); // explicit wait for dynamic elements
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//div[@class='cart-product-add-box']/span[1]")));
+		decreaseQuanbtn.click();
+
+	}
+
+
 
 }

@@ -103,6 +103,18 @@ public class BasketTest {
 	}
 	
 	
+	@Test(priority = 5) // This method removes an item from the basket 
+	public void test5() {
+		CartPageobj.removeItem();
+	
+		
+	}
+	@Test(priority = 6) // This method removes an item from the basket 
+	public void test6() {
+		
+		
+	}
+	
 
 	@BeforeClass
 	public void beforeClass() {

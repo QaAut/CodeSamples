@@ -17,6 +17,12 @@ public class PricesPage {
 	@FindBy(xpath = "//a[@title='Корзина']")
 	WebElement basketIcon;
 
+	
+	@FindBy(xpath = "//div[@class='auth-bar__counter']")
+	WebElement cartItemCount;
+	
+	
+	
 	// Methods start here
 
 	public PricesPage(WebDriver driver) {
@@ -32,7 +38,8 @@ public class PricesPage {
 	}
 
 	public void clickBasket() {
-
+		WebDriverWait wait = new WebDriverWait(driver, 20); // explicit wait for dynamic elements
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='auth-bar__counter']")));
 		basketIcon.click();
 	}
 }
