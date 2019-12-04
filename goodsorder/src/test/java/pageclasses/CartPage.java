@@ -8,6 +8,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -25,8 +26,12 @@ public class CartPage {
 	@FindBy(xpath = "//div[@class='cart-navigation__sum']/span/span[3]")
 	WebElement sumOfOrder;
 	
-	@FindBy(xpath = "//div[@class='cart-navigation__sum']/span/span[3]")
-	WebElement increaseQuan;
+	@FindBy(xpath = "//div[@class='cart-product-add-box']/span[3]")
+	WebElement increaseQuanbtn;
+	
+	@FindBy(xpath = "//div[@class='cart-product-add-box']/span[1]")
+	WebElement decreaseQuanbtn;
+	
 	// Methods begin here
 	public CartPage(WebDriver driver) { // constructor for the page
 		this.driver = driver;
@@ -64,10 +69,27 @@ public class CartPage {
 	}
 	public void clickIncrQuant() throws AWTException { // This method clicks on increase quantity button
 		//Increase button appears only on hover. So we use coordinates to move the mouse over it. 
-		
+		 
 		  Point coordinates = quantityBox.getLocation();
 		  Robot robot = new Robot();
 		  robot.mouseMove(coordinates.getX()+49,coordinates.getY()+130);
+		  WebDriverWait wait = new WebDriverWait(driver, 20); // explicit wait for dynamic elements
+			wait.until(ExpectedConditions
+					.visibilityOfElementLocated(By.xpath("//div[@class='cart-product-add-box']/span[3]")));
+		  increaseQuanbtn.click();
+		  
+
+	}
+	public void clickDecrQuant() throws AWTException { // This method clicks on decrease quantity button
+		//Increase button appears only on hover. So we use coordinates to move the mouse over it. 
+		  Point coordinates = quantityBox.getLocation();
+		  Robot robot = new Robot();
+		  robot.mouseMove(coordinates.getX()- 20,coordinates.getY()+130);
+		WebDriverWait wait = new WebDriverWait(driver, 20); // explicit wait for dynamic elements
+			wait.until(ExpectedConditions
+					.visibilityOfElementLocated(By.xpath("//div[@class='cart-product-add-box']/span[1]")));
+		  decreaseQuanbtn.click(); 
+		  
 
 	}
 	

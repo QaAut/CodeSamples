@@ -61,11 +61,11 @@ public class BasketTest {
 		itemExpected = CartPageobj.getSumOfOrder(); // Saving the sum of the original order
 		CartPageobj.clearQuanBox(); // CLearing quantity box from the previous number
 		CartPageobj.increaseNumber(inputNumber); // Sending the desired number to the quantity box
-		itemActual = CartPageobj.getSumOfOrder(); // Saving the sum after increasing by 2
-		itemExpected = GenericMethods.trimString(itemExpected); // Removing spaces from the String and replacing , with dot												
+		itemActual = CartPageobj.getSumOfOrder(); // Saving the sum after increasing 
+		itemExpected = GenericMethods.trimString(itemExpected); // Removing spaces from the String and replacing , with .												
 		itemActual = GenericMethods.trimString(itemActual);// Removing spaces from the String and replacing , with .
 		expected = GenericMethods.convertStringToDouble(itemExpected); // converting expected item to double
-		expected = expected * GenericMethods.convertStringToDouble(inputNumber); // Increasing expected by 2
+		expected = expected * GenericMethods.convertStringToDouble(inputNumber); // Increasing expected 
 		actual = GenericMethods.convertStringToDouble(itemActual); // converting actual string to double
 		actualBool = GenericMethods.compareDouble(actual, expected); // Comparing to doubles and saving boolean
 		CartPageobj.clearQuanBox(); // CLearing quantity box from the previous number
@@ -76,9 +76,33 @@ public class BasketTest {
 
 	@Test(priority = 3) // This method checks that we can increase quantity by pressing increase button
 	public void test3() throws AWTException {
-		itemExpected = CartPageobj.getSumOfOrder();
-		CartPageobj.clickIncrQuant();
+		itemExpected = CartPageobj.getSumOfOrder(); //Saving the sum of the original order
+		CartPageobj.clickIncrQuant(); //Clicking the increase button
+		itemActual = CartPageobj.getSumOfOrder(); // Saving the sum after increasing 
+		itemExpected = GenericMethods.trimString(itemExpected); // Removing spaces from the String and replacing , with .												
+		itemActual = GenericMethods.trimString(itemActual);// Removing spaces from the String and replacing , with .
+		expected = GenericMethods.convertStringToDouble(itemExpected); // converting expected item to double
+		expected = expected * 2; // Increasing expected by 2 
+		actual = GenericMethods.convertStringToDouble(itemActual); // converting actual string to double
+		actualBool = GenericMethods.compareDouble(actual, expected); // Comparing to doubles and saving boolean
+		assertEquals(actualBool, true); // Comparing actual boolean with the expected result
 	}
+	
+	@Test(priority = 4) // This method checks that we can decrease quantity by pressing decrease button
+	public void test4() throws AWTException {
+		itemExpected = CartPageobj.getSumOfOrder(); //Saving the sum of the original order
+		CartPageobj.clickDecrQuant(); //Clicking the decrease button
+		itemActual = CartPageobj.getSumOfOrder(); // Saving the sum after increasing 
+		itemExpected = GenericMethods.trimString(itemExpected); // Removing spaces from the String and replacing , with .												
+		itemActual = GenericMethods.trimString(itemActual);// Removing spaces from the String and replacing , with .
+		expected = GenericMethods.convertStringToDouble(itemExpected); // converting expected item to double
+		expected = expected / 2; // Increasing expected by 2 
+		actual = GenericMethods.convertStringToDouble(itemActual); // converting actual string to double
+		actualBool = GenericMethods.compareDouble(actual, expected); // Comparing to doubles and saving boolean
+		assertEquals(actualBool, true); // Comparing actual boolean with the expected result
+	}
+	
+	
 
 	@BeforeClass
 	public void beforeClass() {
