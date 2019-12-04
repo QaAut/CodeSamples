@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeClass;
 
 import static org.testng.Assert.assertEquals;
 
+import java.awt.AWTException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -74,18 +75,16 @@ public class BasketTest {
 	}
 
 	@Test(priority = 3) // This method checks that we can increase quantity by pressing increase button
-	public void test3() {
-
+	public void test3() throws AWTException {
+		itemExpected = CartPageobj.getSumOfOrder();
+		CartPageobj.clickIncrQuant();
 	}
 
 	@BeforeClass
 	public void beforeClass() {
 		driver = new ChromeDriver();
 		baseUrl = "https://www.onliner.by/";
-
-		// maximize the window
-		driver.manage().window().maximize();
-		// driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS);
+		driver.manage().window().maximize();		
 		driver.get(baseUrl);
 
 	}

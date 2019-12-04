@@ -1,7 +1,11 @@
 package pageclasses;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +24,9 @@ public class CartPage {
 
 	@FindBy(xpath = "//div[@class='cart-navigation__sum']/span/span[3]")
 	WebElement sumOfOrder;
-
+	
+	@FindBy(xpath = "//div[@class='cart-navigation__sum']/span/span[3]")
+	WebElement increaseQuan;
 	// Methods begin here
 	public CartPage(WebDriver driver) { // constructor for the page
 		this.driver = driver;
@@ -56,5 +62,14 @@ public class CartPage {
 		return newTitle;
 
 	}
+	public void clickIncrQuant() throws AWTException { // This method clicks on increase quantity button
+		//Increase button appears only on hover. So we use coordinates to move the mouse over it. 
+		
+		  Point coordinates = quantityBox.getLocation();
+		  Robot robot = new Robot();
+		  robot.mouseMove(coordinates.getX()+49,coordinates.getY()+130);
+
+	}
+	
 
 }
