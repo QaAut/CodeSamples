@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2019-12-03T15:18:55Z" name="Default suite" finished-at="2019-12-03T15:19:19Z" duration-ms="24155">
+    <groups>
+    </groups>
+    <test started-at="2019-12-03T15:18:55Z" name="Default test" finished-at="2019-12-03T15:19:19Z" duration-ms="24155">
+      <class name="by.onliner.goodsorder.BasketTest">
+        <test-method is-config="true" signature="beforeTest()[pri:0, instance:by.onliner.goodsorder.BasketTest@78b1cc93]" started-at="2019-12-03T15:18:55Z" name="beforeTest" finished-at="2019-12-03T15:18:55Z" duration-ms="9" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method is-config="true" signature="beforeClass()[pri:0, instance:by.onliner.goodsorder.BasketTest@78b1cc93]" started-at="2019-12-03T15:18:55Z" name="beforeClass" finished-at="2019-12-03T15:19:07Z" duration-ms="12807" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method signature="putItemInTheBasket()[pri:0, instance:by.onliner.goodsorder.BasketTest@78b1cc93]" started-at="2019-12-03T15:19:07Z" name="putItemInTheBasket" finished-at="2019-12-03T15:19:13Z" duration-ms="5945" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- putItemInTheBasket -->
+        <test-method signature="increasItemByNumber()[pri:0, instance:by.onliner.goodsorder.BasketTest@78b1cc93]" started-at="2019-12-03T15:19:13Z" name="increasItemByNumber" finished-at="2019-12-03T15:19:19Z" depends-on-methods="by.onliner.goodsorder.BasketTest.putItemInTheBasket" duration-ms="5373" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- increasItemByNumber -->
+        <test-method is-config="true" signature="afterClass()[pri:0, instance:by.onliner.goodsorder.BasketTest@78b1cc93]" started-at="2019-12-03T15:19:19Z" name="afterClass" finished-at="2019-12-03T15:19:19Z" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+        <test-method is-config="true" signature="afterTest()[pri:0, instance:by.onliner.goodsorder.BasketTest@78b1cc93]" started-at="2019-12-03T15:19:19Z" name="afterTest" finished-at="2019-12-03T15:19:19Z" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- by.onliner.goodsorder.BasketTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
