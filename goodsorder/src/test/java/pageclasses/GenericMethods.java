@@ -5,7 +5,7 @@ public class GenericMethods {
 	
 public static String trimString(String x) {
 		
-		x = x.trim().replace(",", ".");
+		x = x.trim().replace(",", ".").replace(" ", "");
 		
 		
 		return x;

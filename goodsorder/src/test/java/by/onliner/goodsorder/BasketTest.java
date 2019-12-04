@@ -2,6 +2,7 @@ package by.onliner.goodsorder;
 
 import org.testng.annotations.Test;
 
+import dataProviders.DataProvider1;
 import junit.framework.Assert;
 import pageclasses.CartPage;
 import pageclasses.GenericMethods;
@@ -35,8 +36,8 @@ public class BasketTest {
 	private double actual;
 	private boolean actualBool;
 
-	@Test
-	public void putItemInTheBasket() throws InterruptedException {
+	@Test(priority = 0) // This method checks that we can put an item into the basket
+	public void test1() throws InterruptedException {
 		mainPageobj = new MainPage(driver); // Create new instance for the main page
 		mainPageobj.clickSearchField(); // Clicking the search field
 		mainPageobj.typeInSearchField(itemToBeFound); // Typing in the search field
@@ -51,19 +52,29 @@ public class BasketTest {
 
 	}
 
-	@Test(dependsOnMethods = { "putItemInTheBasket" })
-	public void increasItemByNumber() {
+	@Test(priority = 1, dataProvider = "quantityBox", dataProviderClass = DataProvider1.class) // This method checks
+																								// that we can increase
+																								// quantity by inputing
+																								// number
+	public void test2(String inputNumber) {
 		itemExpected = CartPageobj.getSumOfOrder(); // Saving the sum of the original order
 		CartPageobj.clearQuanBox(); // CLearing quantity box from the previous number
-		CartPageobj.increaseNumber(); // Sending number 2 to the quantity box
+		CartPageobj.increaseNumber(inputNumber); // Sending the desired number to the quantity box
 		itemActual = CartPageobj.getSumOfOrder(); // Saving the sum after increasing by 2
-		itemExpected = GenericMethods.trimString(itemExpected);
-		itemActual = GenericMethods.trimString(itemActual);
+		itemExpected = GenericMethods.trimString(itemExpected); // Removing spaces from the String and replacing , with dot												
+		itemActual = GenericMethods.trimString(itemActual);// Removing spaces from the String and replacing , with .
 		expected = GenericMethods.convertStringToDouble(itemExpected); // converting expected item to double
-		expected = expected * 2; // Increasing expected by 2
+		expected = expected * GenericMethods.convertStringToDouble(inputNumber); // Increasing expected by 2
 		actual = GenericMethods.convertStringToDouble(itemActual); // converting actual string to double
 		actualBool = GenericMethods.compareDouble(actual, expected); // Comparing to doubles and saving boolean
-		assertEquals(actualBool, true); //Comparing actual boolean with the expected result 
+		CartPageobj.clearQuanBox(); // CLearing quantity box from the previous number
+		CartPageobj.increaseNumber("1"); //Setting quantity back to 1
+		assertEquals(actualBool, true); // Comparing actual boolean with the expected result
+
+	}
+
+	@Test(priority = 3) // This method checks that we can increase quantity by pressing increase button
+	public void test3() {
 
 	}
 

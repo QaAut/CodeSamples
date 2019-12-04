@@ -17,13 +17,10 @@ public class CartPage {
 
 	@FindBy(xpath = "//input[contains(@class,'cart-product-add-box__input')]")
 	WebElement quantityBox;
-	
-	
+
 	@FindBy(xpath = "//div[@class='cart-navigation__sum']/span/span[3]")
 	WebElement sumOfOrder;
-	
-	
-	
+
 	// Methods begin here
 	public CartPage(WebDriver driver) { // constructor for the page
 		this.driver = driver;
@@ -38,26 +35,26 @@ public class CartPage {
 		return title;
 	}
 
-	public void removeItem() { //this method clicks the remove button  (1st one)
+	public void removeItem() { // this method clicks the remove button (1st one)
 		removeButton.click();
 	}
-	public void clearQuanBox() { //this method clears the quantity box
-		quantityBox.click();
-		quantityBox.sendKeys(Keys.BACK_SPACE);
+
+	public void clearQuanBox() { // this method clears the quantity box
+		quantityBox.sendKeys(Keys.BACK_SPACE, Keys.BACK_SPACE);
 	}
-	
-	public void increaseNumber() { //this method increases quantity of item by 2
-		quantityBox.sendKeys("2");
+
+	public void increaseNumber(String x) { // this method increases quantity by our parameter number
+		quantityBox.sendKeys(x);
 	}
-	
+
 	public String getSumOfOrder() { // This methods returns the sum of the items in the basket
 		WebDriverWait wait = new WebDriverWait(driver, 20); // explicit wait for dynamic elements
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='cart-navigation__sum']/span/span[3]")));
-	 String sum = sumOfOrder.getText();
-	 String newTitle = sum.replace(" р.", ""); //Removing the word руб from the beginning
-	 return newTitle;
-		
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//div[@class='cart-navigation__sum']/span/span[3]")));
+		String sum = sumOfOrder.getText();
+		String newTitle = sum.replace(" р.", ""); // Removing the word руб from the beginning
+		return newTitle;
+
 	}
-	
 
 }
