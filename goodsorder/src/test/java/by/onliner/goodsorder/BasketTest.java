@@ -111,7 +111,7 @@ public class BasketTest {
 	
 		
 	}
-	@Test(priority = 6) // This method removes an item from the basket 
+	@Test(priority = 6) //  
 	public void test6() {
 		
 		

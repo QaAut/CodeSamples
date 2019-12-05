@@ -118,7 +118,7 @@ public class CartPage {
 	public boolean isElementNotPresent(String x) {
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(x)));
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(x)));
 			// wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("progress_bar")));
 			return false;
 		} catch (NoSuchElementException e) {
