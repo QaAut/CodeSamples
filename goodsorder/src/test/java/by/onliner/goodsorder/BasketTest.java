@@ -14,12 +14,13 @@ import org.testng.annotations.BeforeClass;
 import static org.testng.Assert.assertEquals;
 
 import java.awt.AWTException;
-import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
+
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
 import org.openqa.selenium.chrome.ChromeDriver;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
@@ -36,6 +37,7 @@ public class BasketTest {
 	private double expected;
 	private double actual;
 	private boolean actualBool;
+	private String xPath;
 
 	@Test(priority = 0) // This method checks that we can put an item into the basket
 	public void test1() throws InterruptedException {
@@ -61,68 +63,65 @@ public class BasketTest {
 		itemExpected = CartPageobj.getSumOfOrder(); // Saving the sum of the original order
 		CartPageobj.clearQuanBox(); // CLearing quantity box from the previous number
 		CartPageobj.increaseNumber(inputNumber); // Sending the desired number to the quantity box
-		itemActual = CartPageobj.getSumOfOrder(); // Saving the sum after increasing 
-		itemExpected = GenericMethods.trimString(itemExpected); // Removing spaces from the String and replacing , with .												
+		itemActual = CartPageobj.getSumOfOrder(); // Saving the sum after increasing
+		itemExpected = GenericMethods.trimString(itemExpected); // Removing spaces from the String and replacing , with
+																// .
 		itemActual = GenericMethods.trimString(itemActual);// Removing spaces from the String and replacing , with .
 		expected = GenericMethods.convertStringToDouble(itemExpected); // converting expected item to double
-		expected = expected * GenericMethods.convertStringToDouble(inputNumber); // Increasing expected 
+		expected = expected * GenericMethods.convertStringToDouble(inputNumber); // Increasing expected
 		actual = GenericMethods.convertStringToDouble(itemActual); // converting actual string to double
 		actualBool = GenericMethods.compareDouble(actual, expected); // Comparing to doubles and saving boolean
 		CartPageobj.clearQuanBox(); // CLearing quantity box from the previous number
-		CartPageobj.increaseNumber("1"); //Setting quantity back to 1
+		CartPageobj.increaseNumber("1"); // Setting quantity back to 1
 		assertEquals(actualBool, true); // Comparing actual boolean with the expected result
 
 	}
 
 	@Test(priority = 3) // This method checks that we can increase quantity by pressing increase button
 	public void test3() throws AWTException {
-		itemExpected = CartPageobj.getSumOfOrder(); //Saving the sum of the original order
-		CartPageobj.clickIncrQuant(); //Clicking the increase button
-		itemActual = CartPageobj.getSumOfOrder(); // Saving the sum after increasing 
-		itemExpected = GenericMethods.trimString(itemExpected); // Removing spaces from the String and replacing , with .												
+		itemExpected = CartPageobj.getSumOfOrder(); // Saving the sum of the original order
+		CartPageobj.clickIncrQuant(); // Clicking the increase button
+		itemActual = CartPageobj.getSumOfOrder(); // Saving the sum after increasing
+		itemExpected = GenericMethods.trimString(itemExpected); // Removing spaces from the String and replacing , with
+																// .
 		itemActual = GenericMethods.trimString(itemActual);// Removing spaces from the String and replacing , with .
 		expected = GenericMethods.convertStringToDouble(itemExpected); // converting expected item to double
-		expected = expected * 2; // Increasing expected by 2 
+		expected = expected * 2; // Increasing expected by 2
 		actual = GenericMethods.convertStringToDouble(itemActual); // converting actual string to double
 		actualBool = GenericMethods.compareDouble(actual, expected); // Comparing to doubles and saving boolean
 		assertEquals(actualBool, true); // Comparing actual boolean with the expected result
 	}
-	
+
 	@Test(priority = 4) // This method checks that we can decrease quantity by pressing decrease button
 	public void test4() throws AWTException {
-		itemExpected = CartPageobj.getSumOfOrder(); //Saving the sum of the original order
-		CartPageobj.clickDecrQuant(); //Clicking the decrease button
-		itemActual = CartPageobj.getSumOfOrder(); // Saving the sum after increasing 
-		itemExpected = GenericMethods.trimString(itemExpected); // Removing spaces from the String and replacing , with .												
+		itemExpected = CartPageobj.getSumOfOrder(); // Saving the sum of the original order
+		CartPageobj.clickDecrQuant(); // Clicking the decrease button
+		itemActual = CartPageobj.getSumOfOrder(); // Saving the sum after increasing
+		itemExpected = GenericMethods.trimString(itemExpected); // Removing spaces from the String and replacing , with
+																// .
 		itemActual = GenericMethods.trimString(itemActual);// Removing spaces from the String and replacing , with .
 		expected = GenericMethods.convertStringToDouble(itemExpected); // converting expected item to double
-		expected = expected / 2; // Dividing expected by 2 
+		expected = expected / 2; // Dividing expected by 2
 		actual = GenericMethods.convertStringToDouble(itemActual); // converting actual string to double
 		actualBool = GenericMethods.compareDouble(actual, expected); // Comparing to doubles and saving boolean
 		assertEquals(actualBool, true); // Comparing actual boolean with the expected result
 	}
-	
-	
-	@Test(priority = 5) // This method removes an item from the basket 
-	public void test5() throws InterruptedException {
+
+	@Test(priority = 5) // This method removes an item from the basket
+	public void test5() {
 		CartPageobj.removeItem();
-		actualBool = CartPageobj.isElementNotPresent("//a[contains(@class,'cart-navigation__button_сheckout')]");
-	System.out.println(actualBool);
-	
-		
+		xPath = "//div[@class='cart-message__preview']";
+		GenericMethods.waitForElement(xPath, driver);
+		actualBool = GenericMethods.isDisplayed(xPath, driver);
+		assertEquals(actualBool, true);
+
 	}
-	@Test(priority = 6) //  
-	public void test6() {
-		
-		
-	}
-	
 
 	@BeforeClass
 	public void beforeClass() {
 		driver = new ChromeDriver();
 		baseUrl = "https://www.onliner.by/";
-		driver.manage().window().maximize();		
+		driver.manage().window().maximize();
 		driver.get(baseUrl);
 
 	}

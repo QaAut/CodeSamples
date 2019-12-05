@@ -22,7 +22,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class CartPage {
 	WebDriver driver;
 
-	@FindBy(xpath = "//a[@class='cart-product__remove']")
+	@FindBy(xpath = "//div[@class='cart-products']//a[@class='cart-product__remove']")
 	WebElement removeButton;
 
 	@FindBy(xpath = "//input[contains(@class,'cart-product-add-box__input')]")
@@ -39,6 +39,11 @@ public class CartPage {
 
 	@FindBy(xpath = "//a[contains(@class,'cart-navigation__button_сheckout')]")
 	WebElement makeOrderBtn;
+	
+	@FindBy(xpath = "//div[@class='cart-message__preview']")
+	WebElement emptyCartIcon;
+	
+	
 
 	// Methods begin here
 	public CartPage(WebDriver driver) { // constructor for the page
@@ -77,12 +82,10 @@ public class CartPage {
 	}
 
 	public void clickIncrQuant() throws AWTException { // This method clicks on increase quantity button
-		// Increase button appears only on hover. So we use coordinates to move the
-		// mouse over it.
-
-		Point coordinates = quantityBox.getLocation();
-		Robot robot = new Robot();
-		robot.mouseMove(coordinates.getX() + 49, coordinates.getY() + 130);
+		//We use actions to move to the element since buttons only visible on hover
+		 Actions action = new Actions(driver);
+		 WebElement we = driver.findElement(By.xpath("//input[contains(@class,'cart-product-add-box__input')]"));
+		 action.moveToElement(we).click().build().perform();
 		WebDriverWait wait = new WebDriverWait(driver, 20); // explicit wait for dynamic elements
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath("//div[@class='cart-product-add-box']/span[3]")));
@@ -91,11 +94,10 @@ public class CartPage {
 	}
 
 	public void clickDecrQuant() throws AWTException { // This method clicks on decrease quantity button
-		// Increase button appears only on hover. So we use coordinates to move the
-		// mouse over it.
-		Point coordinates = quantityBox.getLocation();
-		Robot robot = new Robot();
-		robot.mouseMove(coordinates.getX() - 20, coordinates.getY() + 130);
+		//We use actions to move to the element since buttons only visible on hover
+		Actions action = new Actions(driver);
+		 WebElement we = driver.findElement(By.xpath("//div[@class='cart-product-title']"));
+		 action.moveToElement(we).build().perform();
 		WebDriverWait wait = new WebDriverWait(driver, 20); // explicit wait for dynamic elements
 		wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath("//div[@class='cart-product-add-box']/span[1]")));
@@ -109,22 +111,6 @@ public class CartPage {
 
 	}
 	
-	public WebElement returOfElem(String x) {
-		WebElement b =
-		driver.findElement(By.xpath(x));
-		return b;
-	}
-
-	public boolean isElementNotPresent(String x) {
-		try {
-			WebDriverWait wait = new WebDriverWait(driver, 10);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(x)));
-			// wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("progress_bar")));
-			return false;
-		} catch (NoSuchElementException e) {
-			return true;
-		}
-
-	}
+	
 
 }
