@@ -1,9 +1,10 @@
 package pageclasses;
 
-import org.openqa.selenium.WebElement;
+
 
 public class GenericMethods {
 
+	
 	public static String trimString(String x) {
 
 		x = x.trim().replace(",", ".").replace(" ", "");
@@ -30,5 +31,8 @@ public class GenericMethods {
 			return value;
 		}
 	}
+	
+
+	 
 
 }

@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.sql.Driver;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -13,7 +14,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CartPage {
@@ -100,6 +103,28 @@ public class CartPage {
 
 	}
 
+	public void clickMakeOderBtn() { // This method clicks on make order button
 
+		makeOrderBtn.click();
+
+	}
+	
+	public WebElement returOfElem(String x) {
+		WebElement b =
+		driver.findElement(By.xpath(x));
+		return b;
+	}
+
+	public boolean isElementNotPresent(String x) {
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 10);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(x)));
+			// wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("progress_bar")));
+			return false;
+		} catch (NoSuchElementException e) {
+			return true;
+		}
+
+	}
 
 }

@@ -96,7 +96,7 @@ public class BasketTest {
 		itemExpected = GenericMethods.trimString(itemExpected); // Removing spaces from the String and replacing , with .												
 		itemActual = GenericMethods.trimString(itemActual);// Removing spaces from the String and replacing , with .
 		expected = GenericMethods.convertStringToDouble(itemExpected); // converting expected item to double
-		expected = expected / 2; // Increasing expected by 2 
+		expected = expected / 2; // Dividing expected by 2 
 		actual = GenericMethods.convertStringToDouble(itemActual); // converting actual string to double
 		actualBool = GenericMethods.compareDouble(actual, expected); // Comparing to doubles and saving boolean
 		assertEquals(actualBool, true); // Comparing actual boolean with the expected result
@@ -104,8 +104,10 @@ public class BasketTest {
 	
 	
 	@Test(priority = 5) // This method removes an item from the basket 
-	public void test5() {
+	public void test5() throws InterruptedException {
 		CartPageobj.removeItem();
+		actualBool = CartPageobj.isElementNotPresent("//a[contains(@class,'cart-navigation__button_сheckout')]");
+	System.out.println(actualBool);
 	
 		
 	}
